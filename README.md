@@ -61,3 +61,27 @@ npm install -D babel-loader @babel/core @babel/preset-env @babel/plugin-syntax-d
 - `SW registration failed:  TypeError: Failed to register a ServiceWorker: The URL protocol of the current origin ('null') is not supported.`
 
   Service Worker必须在https和localhost下运行。
+
+- `Type error: Cannot find global value 'Promise'. TS2468`
+
+  [找不到promise](https://github.com/facebook/create-react-app/issues/5683)
+
+  tsconfig.json添加以下配置（编译过程中需要引入的库文件的列表）：
+  ```json
+  "compilerOptions": {
+    "lib": [
+      "es5",
+      "dom",
+      "es2015.promise"
+    ]
+  }
+  ```
+
+- `TS2580: Cannot find name 'require'.`
+
+  首先安装`npm install @types/node --save-dev`，然后tsconfig.json添加配置：
+  ```json
+  "types": [
+    "node"
+  ]
+  ```

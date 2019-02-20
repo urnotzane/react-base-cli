@@ -5,7 +5,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: {
-    bundle: './src/index.js'
+    bundle: './src/index.ts'
   },
   // 根据提供的选项将运行时代码拆分成单独的块，创建单个运行时 bundle(one runtime bundle)
   optimization: {
@@ -28,7 +28,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'react - webpack4',
       favicon: './favicon.ico',
-      template: './src/index.html',
+      template: path.resolve(__dirname, '../src', 'index.html'),
+      filename: './index.html'
     }),
     new WorkboxPlugin.GenerateSW({
       // 这些选项帮助 ServiceWorkers 快速启用
