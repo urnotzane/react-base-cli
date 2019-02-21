@@ -43,11 +43,6 @@ module.exports = {
     new webpack.BannerPlugin({
       banner: 'Copyright © urnotzane'
     }),
-    // 拆分 bundles，同时提升构建速度。
-    new webpack.DllReferencePlugin({
-      context: path.resolve(__dirname, '..'),
-      manifest: require('./manifest.json')
-    }),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
@@ -73,18 +68,25 @@ module.exports = {
         test: /\.less$/,
         exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: ["css-loader?modules&localIdentName=[path][name]-[local]-[hash:base64:5]", {
-            loader: 'postcss-loader',
+          fallback: {
+            loader: 'style-loader',
             options: {
-              ident: 'postcss',
-              syntax: require('postcss-less'),
-              plugins: [
-                require('autoprefixer')(),
-                require('postcss-import')(),
-              ]
+              insertAt: 'top'
             }
-          }, "less-loader",]
+          },
+          use: [
+            "css-loader", 
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                syntax: require('postcss-less'),
+                plugins: [
+                  require('autoprefixer')(),
+                  require('postcss-import')(),
+                ]
+              }
+            }, "less-loader",]
         })
       },
       {

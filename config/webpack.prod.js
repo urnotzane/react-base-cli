@@ -33,6 +33,11 @@ module.exports = merge(common, {
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 5, // 必须大于或等于 1
       minChunkSize: 1000
-    })
+    }),
+    // 拆分 bundles，同时提升构建速度。
+    // new webpack.DllReferencePlugin({
+    //   context: path.resolve(__dirname, '..'),
+    //   manifest: require('./manifest.json')
+    // }),
   ]
 })

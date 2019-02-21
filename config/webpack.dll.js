@@ -11,7 +11,10 @@ module.exports = merge(common, {
   entry: {
     vendor: [
       'es6-promise',
-      'lodash'
+      'lodash',
+      'react',
+      'react-dom',
+      'react-router-dom'
     ]
   },
   output: {

@@ -96,6 +96,21 @@ npm install --save-dev extract-text-webpack-plugin@next
   ]
   ```
 
+- 缓存问题
+
+  DllPlugin插件生成的manifest文件，在清除本地缓存后无法访问页面
+
+  css-modules生成的带后缀的class在ts下无法导入
+
+  postcss-modules生成的带后缀class在导入less.json后项目陷入构建死循环
+  ```bash
+  ERROR in ./src/components/Home/index.less.json
+  Module parse failed: Unexpected end of JSON input while parsing near ''
+  You may need an appropriate loader to handle this file type.
+  ```
+
+  > 折腾了整整一天关于这个问题也还是没有解决，我好累:pensive:
+
 ## 配置react
 ### 安装
 ```bash

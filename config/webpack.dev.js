@@ -24,6 +24,11 @@ module.exports = merge(common, {
         return getPath('css/style.[hash].css').replace('css/js', 'css');
       },
       allChunks: true
-    })
+    }),
+    // 拆分 bundles，同时提升构建速度。
+    // new webpack.DllReferencePlugin({
+    //   context: path.resolve(__dirname, '..'),
+    //   manifest: require('./manifest.json')
+    // }),
   ],
 })
