@@ -95,3 +95,16 @@ npm install --save-dev extract-text-webpack-plugin@next
     "node"
   ]
   ```
+
+## 配置react
+### 安装
+```bash
+# 安装babel编译插件
+npm install --save-dev @babel/preset-react
+
+# 安装react
+npm i --save react react-dom @types/react @types/react-dom
+
+# 安装router
+npm i -D react-router-dom history @types/react-router-dom
+```
