@@ -105,6 +105,6 @@ npm install --save-dev @babel/preset-react
 # 安装react
 npm i --save react react-dom @types/react @types/react-dom
 
-# 安装router
+# 安装router 怎么按需加载
 npm i -D react-router-dom history @types/react-router-dom
 ```
