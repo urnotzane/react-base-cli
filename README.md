@@ -48,12 +48,22 @@ npm install --save-dev webpack-merge
 
 # js编译
 npm install -D babel-loader @babel/core @babel/preset-env @babel/plugin-syntax-dynamic-import @babel/runtime
+
+# 单独打包css
+npm install --save-dev extract-text-webpack-plugin@next
 ```
 
 ### Service Worker离线服务
 [渐进式网络应用程序](https://webpack.docschina.org/guides/progressive-web-application/)
 
-#### 问题
+### 使用postcss
+[postcss](https://github.com/postcss/postcss/blob/master/README-cn.md)
+- 解决全局 CSS 的问题
+  postcss-modules 和 react-css-modules 可以自动以组件为单位隔绝 CSS 选择器。
+- 添加浏览器前缀
+  autoprefixer 添加了 vendor 浏览器前缀，它使用 Can I Use 上面的数据。
+
+## 问题
 - `Failed to register a ServiceWorker: A bad HTTP response code (404) was gwreceived when fetching the script.`
   
   service-worker.js必须和index.html在同一个文件夹

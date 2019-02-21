@@ -2,10 +2,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    bundle: './src/index.ts'
+    bundle: ['./src/index.ts']
   },
   // 根据提供的选项将运行时代码拆分成单独的块，创建单个运行时 bundle(one runtime bundle)
   optimization: {
@@ -29,14 +31,23 @@ module.exports = {
       title: 'react - webpack4',
       favicon: './favicon.ico',
       template: path.resolve(__dirname, '../src', 'index.html'),
-      filename: './index.html'
+      filename: 'index.html'
     }),
     new WorkboxPlugin.GenerateSW({
       // 这些选项帮助 ServiceWorkers 快速启用
       // 不允许遗留任何“旧的” ServiceWorkers
       clientsClaim: true,
       skipWaiting: true
-    })
+    }),
+    // 给每个文件开头添加注释，如版权信息
+    new webpack.BannerPlugin({
+      banner: 'Copyright © urnotzane'
+    }),
+    // 拆分 bundles，同时提升构建速度。
+    new webpack.DllReferencePlugin({
+      context: path.resolve(__dirname, '..'),
+      manifest: require('./manifest.json')
+    }),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
@@ -60,13 +71,21 @@ module.exports = {
         exclude: /node_modules/
       }, {
         test: /\.less$/,
-        use: [{
-          loader: "style-loader" // creates style nodes from JS strings
-        }, {
-          loader: "css-loader" // translates CSS into CommonJS
-        }, {
-          loader: "less-loader" // compiles Less to CSS
-        }]
+        exclude: /node_modules/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader?modules&localIdentName=[path][name]-[local]-[hash:base64:5]", {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              syntax: require('postcss-less'),
+              plugins: [
+                require('autoprefixer')(),
+                require('postcss-import')(),
+              ]
+            }
+          }, "less-loader",]
+        })
       },
       {
         test: /\.(png|svg|jpg|gif)$/,

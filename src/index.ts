@@ -1,11 +1,11 @@
-require('es6-promise').polyfill();
-import './index.less'
+import { polyfill } from 'es6-promise'
+import './style/index.less'
 import registerServiceWorker from './sw'
-
-declare const _: any
+import * as _ from 'lodash'
 
 // 注册SserviceWorker
 registerServiceWorker()
+polyfill()
 
 function component() {
   var element = document.createElement('div');
@@ -16,6 +16,7 @@ function component() {
   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
   element.appendChild(br);
   element.appendChild(button);
+  element.setAttribute('class', 'view')
 
   button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
     var print = module.default;
