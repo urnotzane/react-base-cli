@@ -1,5 +1,5 @@
 import * as React from 'react'
-import './index.less'
+import * as styles from './index.less'
 
 type Props = {}
 
@@ -9,7 +9,7 @@ export default class About extends React.PureComponent<Props, {}> {
   }
   render() {
     return (
-      <h1 className="title">Hello!Welcome to About page.</h1>
+      <h1 className={styles.title}>Hello!Welcome to About page.</h1>
     )
   }
 }

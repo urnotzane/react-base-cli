@@ -96,14 +96,6 @@ npm install --save-dev mini-css-extract-plugin optimize-css-assets-webpack-plugi
   ]
   ```
 
-- 缓存问题
-
-  css-modules生成的带后缀的class在ts下无法导入
-
-  postcss-modules生成的带后缀class在导入less.json后项目陷入构建死循环
-
-  > 折腾了整整一天关于这个问题也还是没有解决，我好累:pensive:
-
 ## 配置react
 ### 安装
 ```bash

@@ -78,7 +78,13 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              localIdentName: '[local]_[hash:base64:8]',
+            }
+          },
           {
             loader: 'postcss-loader',
             options: {

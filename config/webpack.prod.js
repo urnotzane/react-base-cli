@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
@@ -24,6 +25,10 @@ module.exports = merge(common, {
       sourceMap: true,
       cache: true,
       parallel: true,
+    }),
+    new CleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname, '../'),   //指定dist所在目录，也就是根目录
+      verbose: true,        　　　　　　　　　　//开启在控制台输出信息
     }),
     // 压缩css
     new OptimizeCSSAssetsPlugin({}),
