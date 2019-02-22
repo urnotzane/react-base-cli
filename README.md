@@ -96,6 +96,10 @@ npm install --save-dev mini-css-extract-plugin optimize-css-assets-webpack-plugi
   ]
   ```
 
+- `Warning: Hash history cannot PUSH the same path; a new entry will not be added to the history stack`
+
+  这个问题只会在开发环境出现，不会在开发环境出现。
+
 ## 配置react
 ### 安装
 ```bash
