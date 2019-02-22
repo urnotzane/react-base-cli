@@ -7,6 +7,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = merge(common, {
   mode: "production",
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  },
   devtool: 'source-map',
   output: {
     filename: 'js/[name].[chunkhash].js',
@@ -28,11 +33,6 @@ module.exports = merge(common, {
         return getPath('css/style.[chunkhash].css').replace('css/js', 'css');
       },
       allChunks: true
-    }),
-    // 设置chunk大小和数量
-    new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 5, // 必须大于或等于 1
-      minChunkSize: 1000
     }),
     // 拆分 bundles，同时提升构建速度。
     // new webpack.DllReferencePlugin({

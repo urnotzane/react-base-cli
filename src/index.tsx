@@ -5,20 +5,9 @@ import registerServiceWorker from './sw'
 import './style/index.less'
 import App from './containers/App'
 
-// 注册SserviceWorker
-registerServiceWorker()
 polyfill()
-
-// type Props = {
-//   foo: string;
-// };
-
-// class App extends React.PureComponent<Props, {}> {
-//   render() {
-//     return <span>{this.props.foo}</span>;
-//   }
-// }
-
+// 注册ServiceWorker
+registerServiceWorker()
 
 const app = document.getElementById('app')
 ReactDOM.render(<App />, app)

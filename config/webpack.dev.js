@@ -13,18 +13,12 @@ module.exports = merge(common, {
     path: path.resolve(__dirname, '../dist')
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: '../dist',
     hot: true,
     port: 8888,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin({
-      filename:  (getPath) => {
-        return getPath('css/style.[hash].css').replace('css/js', 'css');
-      },
-      allChunks: true
-    }),
     // 拆分 bundles，同时提升构建速度。
     // new webpack.DllReferencePlugin({
     //   context: path.resolve(__dirname, '..'),

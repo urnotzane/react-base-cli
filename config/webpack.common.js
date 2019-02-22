@@ -7,7 +7,14 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    bundle: ['./src/index.tsx']
+    bundle: './src/index.tsx',
+    vendor: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'es6-promise',
+      'lodash'
+    ]
   },
   // 根据提供的选项将运行时代码拆分成单独的块，创建单个运行时 bundle(one runtime bundle)
   optimization: {
@@ -43,6 +50,11 @@ module.exports = {
     new webpack.BannerPlugin({
       banner: 'Copyright © urnotzane'
     }),
+    // 设置chunk大小和数量
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 5, // 必须大于或等于 1
+      minChunkSize: 1000
+    }),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
@@ -75,7 +87,7 @@ module.exports = {
             }
           },
           use: [
-            "css-loader", 
+            "css-loader",
             {
               loader: 'postcss-loader',
               options: {
