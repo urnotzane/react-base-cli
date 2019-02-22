@@ -4,6 +4,7 @@ const common = require('./webpack.common.js');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = merge(common, {
   mode: "production",
@@ -20,8 +21,12 @@ module.exports = merge(common, {
   },
   plugins: [
     new UglifyJSPlugin({
-      sourceMap: true
+      sourceMap: true,
+      cache: true,
+      parallel: true,
     }),
+    // 压缩css
+    new OptimizeCSSAssetsPlugin({}),
     // 指定当前环境
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
@@ -33,6 +38,10 @@ module.exports = merge(common, {
         return getPath('css/style.[chunkhash].css').replace('css/js', 'css');
       },
       allChunks: true
+    }),
+    // 给每个文件开头添加注释，如版权信息
+    new webpack.BannerPlugin({
+      banner: 'Copyright © urnotzane'
     }),
     // 拆分 bundles，同时提升构建速度。
     // new webpack.DllReferencePlugin({

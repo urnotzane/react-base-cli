@@ -2,8 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
@@ -13,7 +13,8 @@ module.exports = {
       'react-dom',
       'react-router-dom',
       'es6-promise',
-      'lodash'
+      'lodash',
+      'history'
     ]
   },
   // 根据提供的选项将运行时代码拆分成单独的块，创建单个运行时 bundle(one runtime bundle)
@@ -46,15 +47,16 @@ module.exports = {
       clientsClaim: true,
       skipWaiting: true
     }),
-    // 给每个文件开头添加注释，如版权信息
-    new webpack.BannerPlugin({
-      banner: 'Copyright © urnotzane'
-    }),
     // 设置chunk大小和数量
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 5, // 必须大于或等于 1
       minChunkSize: 1000
     }),
+    // css分离
+    new MiniCssExtractPlugin({
+      filename: 'css/style.[hash].css',
+      chunkFilename: 'css/style.[hash].css',
+    })
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
@@ -79,27 +81,21 @@ module.exports = {
       }, {
         test: /\.less$/,
         exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: {
-            loader: 'style-loader',
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: 'postcss-loader',
             options: {
-              insertAt: 'top'
+              ident: 'postcss',
+              syntax: require('postcss-less'),
+              plugins: [
+                require('autoprefixer')(),
+                require('postcss-import')(),
+              ]
             }
-          },
-          use: [
-            "css-loader",
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                syntax: require('postcss-less'),
-                plugins: [
-                  require('autoprefixer')(),
-                  require('postcss-import')(),
-                ]
-              }
-            }, "less-loader",]
-        })
+          }, "less-loader",
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,

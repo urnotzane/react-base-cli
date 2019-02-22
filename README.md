@@ -49,8 +49,8 @@ npm install --save-dev webpack-merge
 # js编译
 npm install -D babel-loader @babel/core @babel/preset-env @babel/plugin-syntax-dynamic-import @babel/runtime
 
-# 单独打包css
-npm install --save-dev extract-text-webpack-plugin@next
+# css分离和压缩
+npm install --save-dev mini-css-extract-plugin optimize-css-assets-webpack-plugin
 ```
 
 ### Service Worker离线服务
