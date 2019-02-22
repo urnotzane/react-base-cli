@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -31,10 +30,6 @@ module.exports = {
     }
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      root: path.resolve(__dirname, '../'),   //指定dist所在目录，也就是根目录
-      verbose: true,        　　　　　　　　　　//开启在控制台输出信息
-    }),
     new HtmlWebpackPlugin({
       title: 'react - webpack4',
       favicon: './favicon.ico',

@@ -20,9 +20,9 @@ module.exports = merge(common, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     // 拆分 bundles，同时提升构建速度。
-    // new webpack.DllReferencePlugin({
-    //   context: path.resolve(__dirname, '..'),
-    //   manifest: require('./manifest.json')
-    // }),
+    new webpack.DllReferencePlugin({
+      context: path.resolve(__dirname, '..'),
+      manifest: require('./manifest/manifest.json')
+    }),
   ],
 })

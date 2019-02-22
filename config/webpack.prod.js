@@ -8,12 +8,12 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = merge(common, {
   mode: "production",
+  devtool: 'source-map',
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
     maxAssetSize: 512000
   },
-  devtool: 'source-map',
   output: {
     filename: 'js/[name].[chunkhash].js',
     chunkFilename: 'js/[name].[chunkhash].js',
@@ -44,9 +44,9 @@ module.exports = merge(common, {
       banner: 'Copyright © urnotzane'
     }),
     // 拆分 bundles，同时提升构建速度。
-    // new webpack.DllReferencePlugin({
-    //   context: path.resolve(__dirname, '..'),
-    //   manifest: require('./manifest.json')
-    // }),
+    new webpack.DllReferencePlugin({
+      context: path.resolve(__dirname, '..'),
+      manifest: require('./manifest/manifest.json')
+    }),
   ]
 })
