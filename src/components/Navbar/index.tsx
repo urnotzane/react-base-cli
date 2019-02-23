@@ -5,6 +5,9 @@ import * as styles from './index.less'
 type Props = {}
 
 export default class Navbar extends React.PureComponent<Props, {}> {
+  componentDidMount() {
+    console.log(this)
+  }
   render() {
     return (
       <nav className={styles.navbar_wrapper}>

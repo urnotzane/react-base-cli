@@ -4,7 +4,6 @@ const common = require('./webpack.common.js');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = merge(common, {
@@ -38,12 +37,6 @@ module.exports = merge(common, {
     }),
     // 解决hash频繁变动
     new webpack.HashedModuleIdsPlugin(),
-    new ExtractTextPlugin({
-      filename: (getPath) => {
-        return getPath('css/style.[chunkhash].css').replace('css/js', 'css');
-      },
-      allChunks: true
-    }),
     // 给每个文件开头添加注释，如版权信息
     new webpack.BannerPlugin({
       banner: 'Copyright © urnotzane'

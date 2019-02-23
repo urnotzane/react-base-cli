@@ -7,6 +7,7 @@ import Navbar from '../../components/Navbar'
 
 const history = createHashHistory()
 
+
 type Props = {}
 
 export default class App extends React.PureComponent<Props, {}> {

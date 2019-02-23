@@ -51,6 +51,9 @@ npm install -D babel-loader @babel/core @babel/preset-env @babel/plugin-syntax-d
 
 # css分离和压缩
 npm install --save-dev mini-css-extract-plugin optimize-css-assets-webpack-plugin
+
+# 路由按需加载 按照文档进行配置，但看不出是否生效
+# npm i --save react-loadable @types/react-loadable
 ```
 
 ### Service Worker离线服务
@@ -99,6 +102,8 @@ npm install --save-dev mini-css-extract-plugin optimize-css-assets-webpack-plugi
 - `Warning: Hash history cannot PUSH the same path; a new entry will not be added to the history stack`
 
   这个问题只会在开发环境出现，不会在开发环境出现。
+
+- webpack配置使用`import{}`会报错
 
 ## 配置react
 ### 安装
