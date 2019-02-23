@@ -4,8 +4,6 @@ import { polyfill } from 'es6-promise'
 import registerServiceWorker from './sw'
 import './style/index.less'
 import App from './containers/App'
-import * as Loadable from 'react-loadable';
-import Loading from './components/Loading';
 
 polyfill()
 // 注册ServiceWorker

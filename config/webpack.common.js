@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// const reactLoadableWebpack = require('react-loadable/webpack')
+const reactLoadableWebpack = require('react-loadable/webpack')
 
 module.exports = {
   entry: {
@@ -38,9 +38,9 @@ module.exports = {
       template: path.resolve(__dirname, '../src', 'index.html'),
       filename: 'index.html'
     }),
-    // new reactLoadableWebpack.ReactLoadablePlugin({
-    //   filename: '../dist/react-loadable.json',
-    // }),
+    new reactLoadableWebpack.ReactLoadablePlugin({
+      filename: './dist/react-loadable.json',
+    }),
     new WorkboxPlugin.GenerateSW({
       // 这些选项帮助 ServiceWorkers 快速启用
       // 不允许遗留任何“旧的” ServiceWorkers

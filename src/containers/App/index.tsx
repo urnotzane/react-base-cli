@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
 import { createHashHistory } from 'history';
-import Home from '../Home'
-import About from '../About'
 import Navbar from '../../components/Navbar'
+import routes from '../../routes'
 
 const history = createHashHistory()
 
@@ -17,8 +16,7 @@ export default class App extends React.PureComponent<Props, {}> {
         <div>
           <Navbar />
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
+            {routes.map((item, index) => <Route exact={item.path==='/'} key={index}  path={item.path} component={item.component} />)}
           </Switch>
         </div>
       </Router>
