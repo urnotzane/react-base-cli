@@ -8,14 +8,15 @@ const reactLoadableWebpack = require('react-loadable/webpack')
 
 module.exports = {
   entry: {
-    bundle: './src/index.tsx',
+    bundle: ['./src/index.tsx'],
     vendor: [
       'react',
       'react-dom',
       'react-router-dom',
       'es6-promise',
       'lodash',
-      'history'
+      'history',
+      'react-loadable'
     ]
   },
   // 根据提供的选项将运行时代码拆分成单独的块，创建单个运行时 bundle(one runtime bundle)
@@ -65,13 +66,22 @@ module.exports = {
     rules: [
       {
         // test: /\.m?jsx$/,
-        test: /\.m?js$/,
+        test: /\.(tsx|js|ts)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
           options: {
+            sourceType: 'unambiguous',
             presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-proposal-object-rest-spread', '@babel/plugin-syntax-dynamic-import']
+            plugins: [
+              ["@babel/plugin-transform-runtime", {
+                "helpers": false,
+                "corejs": 2,
+                "regenerator": true
+              }],
+              '@babel/plugin-proposal-object-rest-spread',
+              '@babel/plugin-syntax-dynamic-import',
+            ]
           }
         }
       },
