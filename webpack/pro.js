@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 const commonConfig = require('./common')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
@@ -9,22 +9,23 @@ const proConfig = {
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
-      sourceMap: true
+        sourceMap: true
       })
     ],
     splitChunks: {
-      chunks: 'async',
+      chunks: 'all',
       minSize: 30000,
       maxSize: 0,
       minChunks: 1,
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
-      automaticNameDelimiter: '~',
+      automaticNameDelimiter: '-',
       name: true,
       cacheGroups: {
-        vendors: {
+        commons: {
           test: /[\\/]node_modules[\\/]/,
-          priority: -10
+          name: 'vendors',
+          chunks: 'all'
         },
         default: {
           minChunks: 2,
@@ -36,9 +37,10 @@ const proConfig = {
   },
   plugins: [
     ...commonConfig.plugins,
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
-    }),
+    })
   ]
 }
 

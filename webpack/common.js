@@ -1,16 +1,16 @@
 "use strict"
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const isPro = process.env.NODE_ENV === 'production' 
 
 const commonConfig = {
   entry: './src/index',
   output: {
-    filename: isPro ? 'js/bundle.[contenthash:5].js' : 'bundle.[hash:5].js',
-    path: path.resolve(__dirname, '../dist')
+    filename: isPro ? 'js/[name].[contenthash:5].js' : 'js/[name].[hash:5].js',
+    path: path.resolve(__dirname, '../dist'),
   },
   module: {
     rules: [
@@ -62,6 +62,7 @@ const commonConfig = {
       title: 'react-base-cli',
       filename: 'index.html',
       template: './index.html',
+      inject:true,
       minify: {
         removeAttributeQuotes: true,
         collapseWhitespace: true,
