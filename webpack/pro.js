@@ -1,11 +1,18 @@
 'use strict'
+const merge = require('webpack-merge')
 const commonConfig = require('./common')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
 
-const proConfig = {
-  ...commonConfig,
+const proConfig = merge(commonConfig, {
   mode: 'production',
+  externals: {
+    lodash: {
+      commonjs: 'lodash',
+      amd: 'lodash',
+      root: '_'
+    }
+  },
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
@@ -36,12 +43,11 @@ const proConfig = {
     }
   },
   plugins: [
-    ...commonConfig.plugins,
     new webpack.HashedModuleIdsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     })
   ]
-}
+})
 
 module.exports = proConfig

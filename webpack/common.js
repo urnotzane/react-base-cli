@@ -1,12 +1,15 @@
 "use strict"
 const path = require('path')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const happypackConfig = require('./happypack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const isPro = process.env.NODE_ENV === 'production' 
 
-const commonConfig = {
+const commonConfig = merge(happypackConfig, {
   entry: './src/index',
   output: {
     filename: isPro ? 'js/[name].[contenthash:5].js' : 'js/[name].[hash:5].js',
@@ -14,6 +17,14 @@ const commonConfig = {
   },
   module: {
     rules: [
+      {
+        test: /\.(js|ts|tsx)?$/,
+        use: [
+          'happypack/loader?id=babel',
+          'happypack/loader?id=ts',
+        ],
+        exclude: /(node_modules)/
+      },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
@@ -23,8 +34,8 @@ const commonConfig = {
               hmr: !isPro,
             },
           },
-          'css-loader',
-          'sass-loader',
+          'happypack/loader?id=css',
+          'happypack/loader?id=sass',
         ],
       },
       {
@@ -33,7 +44,7 @@ const commonConfig = {
           {
             loader: 'file-loader',
             options: {
-              name: 'images/[name].[contenthash:5].[ext]'
+              name: 'static/[name].[contenthash:5].[ext]'
             }
           }
         ]
@@ -44,11 +55,11 @@ const commonConfig = {
       },
       {
         test: /\.(csv|tsv)$/,
-        use: ['csv-loader']
+        use: ['happypack/loader?id=csv']
       },
       {
         test: /\.xml$/,
-        use: ['xml-loader']
+        use: ['happypack/loader?id=xml']
       }
     ]
   },
@@ -57,6 +68,9 @@ const commonConfig = {
     new MiniCssExtractPlugin({
       filename: isPro ? 'css/style.[contenthash:5].css' : 'css/style.[hash:5].css',
       chunkFilename: isPro ? 'css/[id].[contenthash:5].css' : 'css/[id].[hash:5].css',
+    }),
+    new webpack.ProvidePlugin({
+      _join: "lodash/join"
     }),
     new HtmlWebpackPlugin({
       title: 'react-base-cli',
@@ -73,6 +87,6 @@ const commonConfig = {
       }
     }),
   ]
-}
+})
 
 module.exports = commonConfig

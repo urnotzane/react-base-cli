@@ -1,10 +1,10 @@
 "use strict"
+const merge = require("webpack-merge")
 const webpack = require('webpack')
 const commonConfig = require('./common')
 const path = require('path')
 
-const devConfig = {
-  ...commonConfig,
+const devConfig = merge(commonConfig, {
   mode: 'development',
   devtool: 'inline-source-map',         // 帮助开发，仅用于开发环境
   devServer: {
@@ -16,10 +16,9 @@ const devConfig = {
     // historyApiFallback: true,           // 任意的 404 响应都可能需要被替代为 index.html
   },
   plugins: [
-    ...commonConfig.plugins,
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ]
-}
+})
 
 module.exports = devConfig
