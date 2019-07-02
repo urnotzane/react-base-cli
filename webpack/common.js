@@ -10,7 +10,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const isPro = process.env.NODE_ENV === 'production' 
 
 const commonConfig = merge(happypackConfig, {
-  entry: './src/index',
+  entry: './src/index.ts',
   output: {
     filename: isPro ? 'js/[name].[contenthash:5].js' : 'js/[name].[hash:5].js',
     path: path.resolve(__dirname, '../dist'),
@@ -21,7 +21,7 @@ const commonConfig = merge(happypackConfig, {
         test: /\.(js|ts|tsx)?$/,
         use: [
           'happypack/loader?id=babel',
-          'happypack/loader?id=ts',
+          'happypack/loader?id=ts'
         ],
         exclude: /(node_modules)/
       },
@@ -39,27 +39,41 @@ const commonConfig = merge(happypackConfig, {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'static/[name].[contenthash:5].[ext]'
-            }
-          }
-        ]
+        test: /\.(jpg|gif|ico|png|svg)$/,
+        loader: 'url-loader',
+        exclude: /(node_modules)/,
+        options: {
+          limit: 1000,                 // 1kb
+          name: 'images/[name].[contenthash:5].[ext]'
+        },
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ['file-loader']
+        test: /\.(woff|eot|ttf|mp4)\??.*$/i,
+        loader: 'url-loader',
+        exclude: /(node_modules)/,
+        options: {
+          limit: 1000,
+          name: 'fonts/[name].[contenthash:5].[ext]'
+        },
       },
       {
         test: /\.(csv|tsv)$/,
-        use: ['happypack/loader?id=csv']
+        use: [{
+          loader: 'happypack/loader?id=csv',
+          options: {
+            name: 'assets/[name].[contenthash:5].[ext]'
+          }
+        }]
       },
       {
         test: /\.xml$/,
-        use: ['happypack/loader?id=xml']
+        use: [{
+          loader: 'happypack/loader?id=xml',
+          options: {
+            name: 'assets/[name].[contenthash:5].[ext]'
+          }
+
+        }]
       }
     ]
   },

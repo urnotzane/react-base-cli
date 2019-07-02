@@ -38,3 +38,24 @@ react脚手架，包括各种常用模块
 ## :question:遇到的问题
 
 - 在Windows系统中yarn run start时显示网页被永久移动，在Mac中则没有此问题。
+
+- webpack全局变量lodash官方使用方法无效
+
+  ```javascript
+  new webpack.ProvidePlugin({
+    // _: "lodash"
+    _join: 'lodash/join'
+  })
+  ```
+
+  需要修改为如下：
+
+  ```javascript
+  new webpack.ProvidePlugin({
+    _join: "lodash/join"
+  })
+  ```
+
+- 使用ts-loader导致图片导入编译后的地址为undefined
+
+  ts中导入图片需要使用require。
