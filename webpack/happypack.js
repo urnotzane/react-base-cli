@@ -1,6 +1,8 @@
 const HappyPack = require('happypack');
 
-const happypack_thread_pool = HappyPack.ThreadPool({ size: 4 });
+const happypack_thread_pool = HappyPack.ThreadPool({
+  size: 4
+});
 
 const happypackConfig = {
   plugins: [
@@ -12,12 +14,12 @@ const happypackConfig = {
     new HappyPack({
       id: 'ts',
       threadPool: happypack_thread_pool,
-      loaders: [
-        {
-          path: 'ts-loader',
-          query: { happyPackMode: true }
+      loaders: [{
+        path: 'ts-loader',
+        query: {
+          happyPackMode: true
         }
-      ],
+      }],
     }),
     new HappyPack({
       id: 'css',
@@ -37,14 +39,12 @@ const happypackConfig = {
     new HappyPack({
       id: 'sass',
       threadPool: happypack_thread_pool,
-      loaders: [
-        {
-          path: 'sass-loader',
-          query: {
-            sourceMap: true
-          }
+      loaders: [{
+        path: 'sass-loader',
+        query: {
+          sourceMap: true
         }
-      ],
+      }],
     })
   ],
 }

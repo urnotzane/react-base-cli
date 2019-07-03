@@ -59,3 +59,66 @@ react脚手架，包括各种常用模块
 - 使用ts-loader导致图片导入编译后的地址为undefined
 
   ts中导入图片需要使用require。
+
+- :question:scss使用url()图片路径错误，还未找到能解决办法。
+
+## :tada:意外收获
+
+### git的使用
+
+- 常用
+
+```bash
+# 创建分支
+git branch branchName
+
+# 切换分支
+git checkout branchName
+
+# 创建并切换分支
+git checkout -b branchName
+
+#查看所有分支
+git branch -a
+
+# 删除本地分支
+git branch -d branchName
+
+# 删除远程分支
+git push origin --delete branchName
+
+# 将分支dev合并到分支master
+git checkout master
+git merge dev
+
+# 删除本地所有暂存的更改
+git checkout -f
+
+# 如果有修改以及加入暂存区
+git reset --hard
+git clean -xdf
+
+# 查看已更改文件
+git status
+
+# 创建新分支后推送
+git push --set-upstream origin branchName
+```
+
+- 问题
+
+1. Please commit your changes or stash them before you switch branches.意思是请在切换分支之前提交您的更改或隐藏它们。关于提交更改就不必说了，下面是隐藏更改的相关命令：
+
+  ```bash
+  # 当前分支隐藏并存储更改
+  git stash
+
+  # 查看隐藏存储的列表
+  git stash list
+
+  # 恢复隐藏的更改（stash@{0}是隐藏存储的id）
+  git stash apply stash@{0}
+
+  # 删除隐藏的更改
+  git stash pop
+  ```

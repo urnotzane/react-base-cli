@@ -28,12 +28,7 @@ const commonConfig = merge(happypackConfig, {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: !isPro,
-            },
-          },
+          isPro ? MiniCssExtractPlugin.loader : 'style-loader',
           'happypack/loader?id=css',
           'happypack/loader?id=sass',
         ],
