@@ -10,6 +10,7 @@ const happypackConfig = {
       id: 'babel',
       threadPool: happypack_thread_pool,
       loaders: ['babel-loader'],
+
     }),
     new HappyPack({
       id: 'ts',

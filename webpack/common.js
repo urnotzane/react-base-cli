@@ -1,6 +1,5 @@
 "use strict"
 const path = require('path')
-const webpack = require('webpack')
 const merge = require('webpack-merge')
 const happypackConfig = require('./happypack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -77,9 +76,6 @@ const commonConfig = merge(happypackConfig, {
     new MiniCssExtractPlugin({
       filename: isPro ? 'css/style.[contenthash:5].css' : 'css/style.[hash:5].css',
       chunkFilename: isPro ? 'css/[id].[contenthash:5].css' : 'css/[id].[hash:5].css',
-    }),
-    new webpack.ProvidePlugin({
-      _join: "lodash/join"
     }),
     new HtmlWebpackPlugin({
       title: 'react-base-cli',

@@ -19,7 +19,8 @@
   "private": false,
   "keywords": [
     "webpack4",
-    "react"
+    "react",
+    "lodash"
   ],
   "bugs": {
     "url": "https://github.com/urnotzane/react-base-cli/issues"
@@ -30,6 +31,7 @@
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@types/lodash": "^4.14.135",
     "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.12.0",
     "clean-webpack-plugin": "^3.0.0",
@@ -39,6 +41,7 @@
     "file-loader": "^4.0.0",
     "happypack": "^5.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "lodash": "^4.17.11",
     "mini-css-extract-plugin": "^0.7.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
@@ -52,8 +55,5 @@
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1",
     "xml-loader": "^1.2.1"
-  },
-  "dependencies": {
-    "lodash": "^4.17.11"
   }
 }

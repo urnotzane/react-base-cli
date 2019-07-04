@@ -1,5 +1,5 @@
-// import _ from 'lodash'
 import './index.scss'
+import { join as _join } from 'lodash'
 
 function component() {
   let element = document.createElement('div')

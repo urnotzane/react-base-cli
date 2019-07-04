@@ -4,11 +4,13 @@ const commonConfig = require('./common')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
 
+
 const proConfig = merge(commonConfig, {
   mode: 'production',
   externals: {
     lodash: {
       commonjs: 'lodash',
+      commonjs2: 'lodash',
       amd: 'lodash',
       root: '_'
     }

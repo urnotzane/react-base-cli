@@ -4,7 +4,8 @@
       "@babel/env",
       {
         "modules": false
-      }
+      },
+      "@babel/es2015"
     ]
   ],
   "plugins": [
@@ -14,11 +15,8 @@
     }],
     ["@babel/plugin-transform-runtime",
       {
-        "absoluteRuntime": false,
-        "corejs": false,
-        "helpers": true,
+        "helpers": false,
         "regenerator": true,
-        "useESModules": false
       }
     ]
   ]

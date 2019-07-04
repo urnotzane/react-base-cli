@@ -31,7 +31,7 @@ react脚手架，包括各种常用模块
 - webpack-merge
 
   webpack的构建我们分为开发环境和生产环境等，每个环境需要不同的配置，而各种配置会有很多重复部分，抽取公共部分配置，使用此模块合并公共配置和不同配置。
-- happyhack
+- happypack
 
   js是单线程语言，使用此模块将webpack配置为多线程，提高项目构建速度。由于HappyPack 对file-loader、url-loader 支持的不友好，所以不建议对该loader使用。
 
@@ -52,7 +52,7 @@ react脚手架，包括各种常用模块
 
   ```javascript
   new webpack.ProvidePlugin({
-    _join: "lodash/join"
+    _: "lodash/index"
   })
   ```
 
