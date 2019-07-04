@@ -1,5 +1,5 @@
-const devConfig = require('./dev')
-const proConfig = require('./pro')
+const devConfig = require('./webpack.dev')
+const proConfig = require('./webpack.pro')
 
 const isPro = process.env.NODE_ENV === 'production'
 

@@ -5,10 +5,11 @@
     "module": "commonjs",
     "resolveJsonModule": true,
     "target": "es5",
-    "jsx": "react",
+    "tsx": "react",
     "allowJs": true,
     "sourceMap": true,
     "removeComments": true,
+    "esModuleInterop": true,
     "lib": [
       "es5",
       "dom",

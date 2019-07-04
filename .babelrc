@@ -5,8 +5,9 @@
       {
         "modules": false
       },
-      "@babel/es2015"
-    ]
+    ],
+    "@babel/react",
+    // "@babel/es2015"
   ],
   "plugins": [
     ["import", {

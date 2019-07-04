@@ -7,8 +7,8 @@
     "*.css"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --colors --progress --config webpack/webpack.config.js",
-    "start": "webpack-dev-server --colors --open --progress --config webpack/webpack.config.js"
+    "build": "cross-env NODE_ENV=production webpack --colors --progress --config config/webpack.config.js",
+    "start": "webpack-dev-server --colors --open --progress --config config/webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,11 @@
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@babel/preset-react": "^7.0.0",
     "@types/lodash": "^4.14.135",
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.4",
+    "autoprefixer": "^9.6.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.12.0",
     "clean-webpack-plugin": "^3.0.0",
@@ -44,8 +48,11 @@
     "lodash": "^4.17.11",
     "mini-css-extract-plugin": "^0.7.0",
     "node-sass": "^4.12.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-pxtorem": "^4.0.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "sugarss": "^2.0.0",
     "ts-loader": "^6.0.4",
     "typescript": "^3.5.2",
     "uglifyjs-webpack-plugin": "^2.1.3",
@@ -55,5 +62,9 @@
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1",
     "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }

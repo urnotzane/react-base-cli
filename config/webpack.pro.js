@@ -1,6 +1,6 @@
 'use strict'
 const merge = require('webpack-merge')
-const commonConfig = require('./common')
+const commonConfig = require('./webpack.common')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
 

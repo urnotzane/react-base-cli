@@ -1,34 +1,39 @@
 "use strict"
 const path = require('path')
 const merge = require('webpack-merge')
-const happypackConfig = require('./happypack')
+const happypackConfig = require('./webpack.happypack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const {
+  CleanWebpackPlugin
+} = require('clean-webpack-plugin')
 
-const isPro = process.env.NODE_ENV === 'production' 
+const isPro = process.env.NODE_ENV === 'production'
 
 const commonConfig = merge(happypackConfig, {
-  entry: './src/index.ts',
+  entry: './src/index.tsx',
   output: {
     filename: isPro ? 'js/[name].[contenthash:5].js' : 'js/[name].[hash:5].js',
     path: path.resolve(__dirname, '../dist'),
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(js|ts|tsx)?$/,
         use: [
           'happypack/loader?id=babel',
           'happypack/loader?id=ts'
         ],
-        exclude: /(node_modules)/
+        exclude: /(node_modules)/,
+        resolve: {        // 导入tsx和ts时有用
+          extensions: ['.ts', '.tsx'],
+        },
       },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
           isPro ? MiniCssExtractPlugin.loader : 'style-loader',
           'happypack/loader?id=css',
+          'happypack/loader?id=postcss',
           'happypack/loader?id=sass',
         ],
       },
@@ -37,7 +42,7 @@ const commonConfig = merge(happypackConfig, {
         loader: 'url-loader',
         exclude: /(node_modules)/,
         options: {
-          limit: 1000,                 // 1kb
+          limit: 1000, // 1kb
           name: 'images/[name].[contenthash:5].[ext]'
         },
       },
@@ -80,8 +85,8 @@ const commonConfig = merge(happypackConfig, {
     new HtmlWebpackPlugin({
       title: 'react-base-cli',
       filename: 'index.html',
-      template: './index.html',
-      inject:true,
+      template: './src/index.html',
+      inject: true,
       minify: {
         removeAttributeQuotes: true,
         collapseWhitespace: true,

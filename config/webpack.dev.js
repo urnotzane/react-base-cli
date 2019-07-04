@@ -1,7 +1,7 @@
 "use strict"
 const merge = require("webpack-merge")
 const webpack = require('webpack')
-const commonConfig = require('./common')
+const commonConfig = require('./webpack.common')
 const path = require('path')
 
 const devConfig = merge(commonConfig, {

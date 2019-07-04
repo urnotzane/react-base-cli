@@ -28,6 +28,16 @@ const happypackConfig = {
       loaders: ['css-loader'],
     }),
     new HappyPack({
+      id: 'postcss',
+      threadPool: happypack_thread_pool,
+      loaders: [{
+        loader: 'postcss-loader',
+        options: {
+          syntax: 'sugarss',
+        }
+      }],
+    }),
+    new HappyPack({
       id: 'csv',
       threadPool: happypack_thread_pool,
       loaders: ['csv-loader'],
