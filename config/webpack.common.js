@@ -11,7 +11,9 @@ const {
 const isPro = process.env.NODE_ENV === 'production'
 
 const commonConfig = merge(happypackConfig, {
-  entry: './src/index.tsx',
+  entry: {
+    bundle: './src/index.tsx',
+  },
   output: {
     filename: isPro ? 'js/[name].[contenthash:5].js' : 'js/[name].[hash:5].js',
     path: path.resolve(__dirname, '../dist'),

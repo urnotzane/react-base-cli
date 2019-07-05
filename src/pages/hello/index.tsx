@@ -1,12 +1,25 @@
 import * as React from 'react'
 import CSSModules from 'react-css-modules';
 import styles from './index.scss'
+import _ from 'lodash';
 
-@CSSModules(styles)
-class Index extends React.PureComponent {
-  render() {
-    return <div styleName='hello'>你好！</div>
-  }
+const { useState, useEffect } = React
+
+const Index = () => {
+  const [hello, setHello] = useState('加载中...')
+
+  useEffect(() => {
+    new Promise(resolve => {
+      setTimeout(() => {
+        const arr = ['Hello', 'world!']
+        resolve(_.join(arr, ' '))
+      }, 3000);
+    }).then((res: string) => setHello(res))
+  })
+
+  return (
+    <div styleName='hello'>{hello}</div>
+  )
 }
 
-export default Index
+export default CSSModules(Index, styles)

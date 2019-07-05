@@ -7,14 +7,6 @@ const webpack = require('webpack')
 
 const proConfig = merge(commonConfig, {
   mode: 'production',
-  externals: {
-    lodash: {
-      commonjs: 'lodash',
-      commonjs2: 'lodash',
-      amd: 'lodash',
-      root: '_'
-    }
-  },
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
