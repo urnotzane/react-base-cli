@@ -24,7 +24,7 @@ const commonConfig = merge(happypackConfig, {
           'happypack/loader?id=ts'
         ],
         exclude: /(node_modules)/,
-        resolve: {        // 导入tsx和ts时有用
+        resolve: { // 导入tsx和ts时有用
           extensions: ['.ts', '.tsx'],
         },
       },
@@ -33,7 +33,8 @@ const commonConfig = merge(happypackConfig, {
         use: [
           isPro ? MiniCssExtractPlugin.loader : 'style-loader',
           'happypack/loader?id=css',
-          'happypack/loader?id=postcss',
+          'resolve-url-loader',
+          'postcss-loader',
           'happypack/loader?id=sass',
         ],
       },
@@ -43,7 +44,8 @@ const commonConfig = merge(happypackConfig, {
         exclude: /(node_modules)/,
         options: {
           limit: 1000, // 1kb
-          name: 'images/[name].[contenthash:5].[ext]'
+          name: 'images/[name].[contenthash:5].[ext]',
+          publicPath: '..'
         },
       },
       {
@@ -52,7 +54,8 @@ const commonConfig = merge(happypackConfig, {
         exclude: /(node_modules)/,
         options: {
           limit: 1000,
-          name: 'fonts/[name].[contenthash:5].[ext]'
+          name: 'fonts/[name].[contenthash:5].[ext]',
+          publicPath: '..'
         },
       },
       {
@@ -60,7 +63,8 @@ const commonConfig = merge(happypackConfig, {
         use: [{
           loader: 'happypack/loader?id=csv',
           options: {
-            name: 'assets/[name].[contenthash:5].[ext]'
+            name: 'assets/[name].[contenthash:5].[ext]',
+            publicPath: '..'
           }
         }]
       },
@@ -69,9 +73,9 @@ const commonConfig = merge(happypackConfig, {
         use: [{
           loader: 'happypack/loader?id=xml',
           options: {
-            name: 'assets/[name].[contenthash:5].[ext]'
+            name: 'assets/[name].[contenthash:5].[ext]',
+            publicPath: '..'
           }
-
         }]
       }
     ]

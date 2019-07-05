@@ -1,9 +1,11 @@
 import * as React from 'react'
-import './index.scss'
+import CSSModules from 'react-css-modules';
+import styles from './index.scss'
 
+@CSSModules(styles)
 class Index extends React.PureComponent {
   render() {
-    return <div className='hello'>你好！</div>
+    return <div styleName='hello'>你好！</div>
   }
 }
 

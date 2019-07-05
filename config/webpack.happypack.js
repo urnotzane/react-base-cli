@@ -1,4 +1,5 @@
 const HappyPack = require('happypack');
+const path = require('path')
 
 const happypack_thread_pool = HappyPack.ThreadPool({
   size: 4
@@ -25,15 +26,18 @@ const happypackConfig = {
     new HappyPack({
       id: 'css',
       threadPool: happypack_thread_pool,
-      loaders: ['css-loader'],
-    }),
-    new HappyPack({
-      id: 'postcss',
-      threadPool: happypack_thread_pool,
       loaders: [{
-        loader: 'postcss-loader',
+        loader: 'css-loader',
         options: {
-          syntax: 'sugarss',
+          url: url => {
+            url = '../' + url
+            return true;
+          },
+          modules: {
+            mode: 'local',
+            localIdentName: '[path][name]__[local]--[hash:base64:5]',
+            context: path.resolve(__dirname, 'src'),
+          }
         }
       }],
     }),

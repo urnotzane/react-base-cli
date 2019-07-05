@@ -60,7 +60,9 @@ react脚手架，包括各种常用模块
 
   ts中导入图片需要使用require。
 
-- :question:scss使用url()图片路径错误，还未找到能解决办法。
+- scss使用url()图片路径错误。
+
+  配置url-loader的`publicePath`为目标目录即可。
 
 ## :tada:意外收获
 
