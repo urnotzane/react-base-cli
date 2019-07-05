@@ -7,7 +7,6 @@
       },
     ],
     "@babel/react",
-    // "@babel/es2015"
   ],
   "plugins": [
     ["import", {
