@@ -84,7 +84,10 @@ git checkout -b branchName
 git branch -a
 
 # 删除本地分支
-git branch -d branchName
+git branch -D branchName
+
+# 撤销add
+git reset HEAD
 
 # 删除远程分支
 git push origin --delete branchName
