@@ -4,40 +4,42 @@ import styles from './index.scss'
 import _ from 'lodash';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { say_hello_to } from '../../redux/reducers'
+import actions from '../../redux/actions'
 
 const { useState, useEffect } = React
 
-interface Props {
-  say_hello: () => string
-}
-const Index = (props: Props) => {
+
+const Index = (props: any) => {
   const [hello, setHello] = useState('加载中...')
+  console.log(props)
 
   useEffect(() => {
-    console.log(props.say_hello)
     new Promise(resolve => {
       setTimeout(() => {
-        const arr = ['Hello', 'world!']
+        const arr = ['Hello', 'to ']
         resolve(_.join(arr, ' '))
       }, 3000);
     }).then((res: string) => setHello(res))
-  })
+  }, [hello])
 
   return (
-    <div styleName='hello'>{hello}</div>
+    <div styleName='hello'>
+      <div>{hello + props.name}</div>
+      <div styleName='btn' onClick={props.say_redux}>redux</div>
+      <div styleName='btn' onClick={props.say_redux_saga}>redux-saga</div>
+      <div styleName='btn' onClick={props.say_redux_async}>redux async</div>
+    </div>
   )
 }
 
 const map_state_to_props = (state: any) => {
-  return {
-    name: state.say_hello_to
-  };
+  console.log(state)
+  return { ...state.hello };
 };
 
 const map_dispatch_to_props = (dispatch: any) => {
   return bindActionCreators(
-    { say_hello_to },
+    { ...actions },
     dispatch,
   );
 };
