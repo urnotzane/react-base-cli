@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosRequestConfig, AxiosInstance } from 'axios'
 
 const config: AxiosRequestConfig = {
   headers: {
@@ -8,4 +8,6 @@ const config: AxiosRequestConfig = {
   timeout: 60000,
 }
 
-export default axios.create(config)
+const request: AxiosInstance = axios.create(config)
+
+export default request
