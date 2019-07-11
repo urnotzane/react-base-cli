@@ -8,38 +8,41 @@ import actions from '../../redux/actions'
 
 const { useState, useEffect } = React
 
-
 const Index = (props: any) => {
   const [hello, setHello] = useState('加载中...')
-  console.log(props)
 
   useEffect(() => {
-    new Promise(resolve => {
-      setTimeout(() => {
-        const arr = ['Hello', 'to ']
-        resolve(_.join(arr, ' '))
-      }, 3000);
-    }).then((res: string) => setHello(res))
-  }, [hello])
+    props.get_user()
+  }, [])
 
   return (
-    <div styleName='hello'>
-      <div>{hello + props.name}</div>
-      <div styleName='btn' onClick={props.say_redux}>redux</div>
-      <div styleName='btn' onClick={props.say_redux_saga}>redux-saga</div>
-      <div styleName='btn' onClick={props.say_redux_async}>redux async</div>
+    <div styleName='container'>
+      <h1 styleName='title'>{props.fetching ? '加载中...' : 'Hello Github!'}</h1>
+      <main styleName='main-list'>
+        {props.users.map((item: any) =>
+          <div styleName='user' key={item.id}>
+            <div styleName='avatar'><img src={item.avatar_url} /></div>
+            <div styleName='info'>
+              <div>{item.login}</div>
+            </div>
+          </div>)}
+      </main>
     </div>
   )
 }
 
+Index.defaultProps = {
+  users: [],
+  fetching: false
+}
+
 const map_state_to_props = (state: any) => {
-  console.log(state)
-  return { ...state.hello };
+  return { ...state.getting_user };
 };
 
 const map_dispatch_to_props = (dispatch: any) => {
   return bindActionCreators(
-    { ...actions },
+    { get_user: actions.get_user },
     dispatch,
   );
 };

@@ -14,6 +14,13 @@ const devConfig = merge(commonConfig, {
     host: "0.0.0.0",
     hot: true,
     // historyApiFallback: true,           // 任意的 404 响应都可能需要被替代为 index.html
+    proxy: {
+      "/api": {
+        target: 'https://api.github.com',
+        changeOrigin: true,
+        pathRewrite: {"^/api" : ""}
+      }
+    }
   },
   plugins: [
     new webpack.NamedModulesPlugin(),

@@ -1,22 +1,13 @@
 import { combineReducers } from 'redux'
 import actionsTypes from './actionTypes'
-import { handleActions } from 'redux-actions'
+import { handleAction } from 'redux-actions'
 
-const hello = handleActions({
-  [actionsTypes.REDUX]: (state: any, action) => {
-    return {
-      ...state,
-      name: action.payload
-    }
-  },
-  [actionsTypes.REDUX_SAGA]: (state: any, action) => {
-    return {
-      ...state,
-      name: action.payload
-    }
-  },
-}, { name: 'zane' })
+const getting_user = handleAction(actionsTypes.GETTING_USERS, (_state: any, action) => {
+  return {
+    ...action.payload
+  }
+}, {fethcing: true, users: []})
 
 export default combineReducers({
-  hello
+  getting_user,
 })

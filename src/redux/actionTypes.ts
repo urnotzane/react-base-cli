@@ -1,9 +1,7 @@
-const REDUX = 'REDUX'
-const REDUX_SAGA = 'REDUX_SAGA'
-const REDUX_ASYNC = 'REDUX_ASYNC'
+const GETTING_USERS = 'GETTING_USERS'
+const GET_USERS = 'GET_USERS'
 
 export default {
-  REDUX,
-  REDUX_ASYNC,
-  REDUX_SAGA,
+  GET_USERS,
+  GETTING_USERS,
 }
