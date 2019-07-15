@@ -2,6 +2,13 @@
 
 react脚手架，包括各种常用模块
 
+## :notebook:计划
+
+- redux-saga
+- 封装axios请求
+- react-router
+- 使用者可选择配置项
+
 ## :memo:包含的模块
 
 - clean-webpack-plugin

@@ -17,6 +17,9 @@ const commonConfig = merge(happypackConfig, {
   output: {
     filename: isPro ? 'js/[name].[contenthash:5].js' : 'js/[name].[hash:5].js',
     path: path.resolve(__dirname, '../dist'),
+    chunkFilename: isPro ? 'js/[name].chunk.[contenthash:5].js' : 'js/[name].chunk.[hash:5].js',
+    library: 'library',
+    // libraryTarget: 'umd',
   },
   module: {
     rules: [{
